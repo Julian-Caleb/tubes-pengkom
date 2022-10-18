@@ -5,6 +5,15 @@
 # nama, fakultas, programStudi : string
 # nim, semester, mataKuliah : int
 
+# namaMataKuliah, kodeMataKuliah : string
+# komponenNilai : int
+# nilaiAkhir : float
+# arrayKomponenNilai : arr [0..komponenNilai] of string
+# persentasePenilaian : arr [0..komponenNilai] of int
+
+# banyakInputNilai, nilaiTotal, inputNilai : int
+# nilaiAkhirKomponen : float
+
 # FUNCTION 
 # Menghitung nilai 1 semester
 def SatuSemester (semester, mataKuliah) :
@@ -27,7 +36,7 @@ def SatuMataKuliah (semester, mataKuliah) :
             arrayKomponenNilai[j] = input(f"Nama komponen penilaian ke-{j+1}: ")
             persentasePenilaian[j] = int(input(f"Persentase komponen penilaian ke-{j+1}: "))
             nilaiAkhir += SatuKomponen(arrayKomponenNilai[j], persentasePenilaian[j])    
-        nilaiAkhir = str(round(nilaiAkhir, 2))
+        nilaiAkhir = round(nilaiAkhir, 2)
         print("")
         print(f"Nilai akhir {kodeMataKuliah}-{namaMataKuliah} pada semester {semester} adalah {nilaiAkhir}")
 
