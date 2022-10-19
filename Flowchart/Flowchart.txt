@@ -8,6 +8,3 @@ Flowchart pada Sistem Penilaian Mahasiswa dibagi menjadi beberapa bagian:
 - Flowchart function SatuMataKuliah()
 - Flowchart function SatuKomponen()
 - Flowchart function CetakHasil()
-
-
-	
