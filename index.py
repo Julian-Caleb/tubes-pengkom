@@ -5,27 +5,29 @@
 # nama, fakultas, programStudi : string
 # nim, semester, mataKuliah : int
 
-# FUNCTION 
-
+# FUNCTION AND PROCEDURES    
 # Menghitung nilai 1 semester
 def SatuSemester (semester) :
-    # FUNGSI MENGHITUNG NILAI DARI SATU SEMESTER
-    # Fungsi dibuat untuk menghitung nilai akhir dari satu semester dengan meminta input berapa banyak mata kuliah dalam satu semester
-
+    # FUNGSI 
+    # Fungsi 
+    
     # KAMUS LOKAL
-    # semester, mataKuliah, nilaiSatuSemester : float
-    # nilaiAkhir : 
+    # 
     
     # ALGORTIMA
     mataKuliah = int(input(f"Berapa banyak mata kuliah dalam semester {semester}: "))
-    nilaiSatuSemester = 0
+    nilaiAkhir = [0 for i in range (mataKuliah)]
+    nilaiIndex = ["*" for i in range (mataKuliah)]
+    nilaiMataKuliah = [0 for i in range (mataKuliah)]
+    banyakSKS = [0 for i in range (mataKuliah)]
     for i in range (mataKuliah) :
-        nilaiAkhir = SatuMataKuliah (semester, mataKuliah)
-        nilaiSatuSemester += nilaiAkhir
-    nilaiSatuSemester = nilaiSatuSemester/mataKuliah
-    print(f"Nilai akhir pada semester {semester} adalah {nilaiSatuSemester}")
-    return nilaiSatuSemester
-    
+        banyakSKS[i] = int(input(f"Banyak SKS mata kuliah {i+1}: "))
+        print("")
+        nilaiAkhir[i] = SatuMataKuliah (semester, mataKuliah)
+        nilaiIndex[i] = MencariIndexIP (nilaiAkhir[i])
+    nilaiIP = MenghitungIP (banyakSKS, nilaiIndex)
+    IPSemester = MencariIndexIP (nilaiIP)
+    return nilaiIP, IPSemester
         
 # Menghitung nilai 1 mata kuliah
 def SatuMataKuliah (semester, mataKuliah) :
@@ -53,7 +55,7 @@ def SatuMataKuliah (semester, mataKuliah) :
         print("")
         arrayKomponenNilai[j] = input(f"Nama komponen penilaian ke-{j+1}: ")
         persentasePenilaian[j] = int(input(f"Persentase komponen penilaian ke-{j+1} (dalam persen): "))
-        nilaiAkhir += SatuKomponen(arrayKomponenNilai[j], persentasePenilaian[j])    
+        nilaiAkhir += SatuKomponenPenilaian(arrayKomponenNilai[j], persentasePenilaian[j])    
     nilaiAkhir = round(nilaiAkhir, 2)
     print("")
     print(f"Nilai akhir {kodeMataKuliah}-{namaMataKuliah} pada semester {semester} adalah {nilaiAkhir}")
@@ -61,7 +63,7 @@ def SatuMataKuliah (semester, mataKuliah) :
     
 
 # Nilai 1 komponen penilaian
-def SatuKomponen (arrayKomponenNilai, persentasePenilaian) : 
+def SatuKomponenPenilaian (arrayKomponenNilai, persentasePenilaian) : 
     # FUNGSI MENGHITUNG NILAI DARI SATU KOMPONEN
     # Fungsi dibuat untuk menghitung nilai akhir dari satu komponen penilaian berdasarkan input persentase
 
@@ -79,22 +81,70 @@ def SatuKomponen (arrayKomponenNilai, persentasePenilaian) :
     nilaiAkhirKomponen = ((nilaiTotal/banyakInputNilai)*persentasePenilaian)/100
     return nilaiAkhirKomponen
 
-# Mencari index
-def MencariIndex () :
-    print("nanti")
+# Mencari index satu mata kuliah
+def MencariIndexNilaiAkhir (nilaiAkhir) :
+    # inputIndex()
+    hurufIndex = ["A", "AB", "B", "BC", "C", "D", "E"]
+    angkaIndex = [75, 68, 60, 53, 45, 38, 0]
+    bermasalah = input("Apakah bermasalah (Y/N):")
+    if bermasalah == "Y" :
+        return "T"
+    else :
+        for i in range (7) :
+            if nilaiAkhir >= angkaIndex[i] :
+                return hurufIndex[i]
+    
+# # Input index
+# # Digunakan jika ingin menggunakan index sendiri
+# hurufIndex = ["A", "AB", "B", "BC", "C", "D", "E"]
+# angkaIndex = [0 for i in range (7)]
+# for i in range (6) : # Dibawah minimal D pasti nilai E
+#     angkaIndex[i] = int(input(f"Masukkan nilai minimal {hurufIndex[i]}: "))
+# # print(angkaIndex)
     
 # Menghitung IP
-def MenghitungIP () :
-    print("nanti")
+def MenghitungIP (banyakSKS, nilaiIndex) :
+    totalSKS = 0
+    totalNilai = 0
+    angkaIndexMatkul = [0 for i in range (7)]
+    hurufIndex = ["A", "AB", "B", "BC", "C", "D", "E"]
+    angkaIndex = [4, 3.5, 3, 2.5, 2, 1, 0]
+    for i in range (len(banyakSKS)) :
+        j = 0
+        while True :
+            if nilaiIndex[i] == hurufIndex[j] :
+                angkaIndexMatkul[i] = angkaIndex[i]
+                break
+            else :
+                j += 1
+        totalNilai += banyakSKS[i] * angkaIndexMatkul[i]
+        totalSKS += banyakSKS[i]
+    nilaiIP = totalNilai/totalSKS
+    return nilaiIP
+
+# Mencari index IP
+def MencariIndexIP (nilaiAkhir) :
+    hurufIndex = ["A", "AB", "B", "BC", "C", "D", "E"]
+    angkaIndex = [4, 3.5, 3, 2.5, 2, 1, 0]
+    for i in range (7) :
+        if nilaiAkhir >= angkaIndex[i] :
+            return hurufIndex[i]
 
 # Mencetak hasil
-def CetakHasil (nama, nim, fakultas, programStudi, semester, nilaiSatuSemester) :
+def CetakHasil (nama, nim, fakultas, programStudi, semester, IPSemester) :
+    # PROSEDUR MENCETAK HASIL BELAJAR 1 SEMESTER MAHASISWA
+    # Prosedur dibuat untuk mencetak identitas dan hasil belajar mahasiswa dalam jangka waktu 1 semester
+    
+    # KAMUS
+    
+    # ALGORITMA
     print("----------HASIL PENILAIAN MAHASISWA----------")
     print("Nama\t\t\t:\t", nama)
     print("NIM\t\t\t:\t", nim)
     print("Fakultas\t\t:\t", fakultas)
     print("Program Studi\t\t:\t", programStudi)
-    print(f"Nilai akhir semester{semester}\t:\t{nilaiSatuSemester}")
+    print(f"Nilai akhir semester {semester} adalah {IPSemester[0]}")
+    print(f"Index akhir semester {semester} adalah {IPSemester[1]}")
 
 # MAIN CODE
 # Identitas
@@ -102,15 +152,16 @@ nama = input("Masukkan nama lengkap: ")
 nim = int(input("Masukkan NIM: "))
 fakultas = input("Masukkan fakultas: ")
 programStudi = input("Masukkan program studi: ")
+print("")
 
 # Penilaian
 semester = int(input("Menghitung nilai berapa semester: "))
 # Looping tiap semester
 for i in range (semester) :
     # Mengambil nilai akhir tiap semester
-    nilaiSatuSemester = SatuSemester (semester)
+    IPSemester = SatuSemester (semester)
     # Output
-    CetakHasil(nama, nim, fakultas, programStudi, semester, nilaiSatuSemester)
+    CetakHasil (nama, nim, fakultas, programStudi, semester, IPSemester)
         
 
 
