@@ -1,0 +1,13 @@
+FLOWCHART
+
+Flowchart pada Sistem Penilaian Mahasiswa dibagi menjadi beberapa bagian:
+- Flowchart main
+- Flowchart function MencariIndex()
+- Flowchart function MenghitungIP()
+- Flowchart function SatuSemester()
+- Flowchart function SatuMataKuliah()
+- Flowchart function SatuKomponen()
+- Flowchart function CetakHasil()
+
+
+	
