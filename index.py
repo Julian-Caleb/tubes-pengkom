@@ -2,17 +2,46 @@
 # Program dibuat untuk menghitung nilai mahasiswa dalam 2 semester TPB
 
 # KAMUS GLOBAL
-# nama, fakultas, programStudi : string
-# nim, semester, mataKuliah : int
+# 
 
 # FUNCTION AND PROCEDURES    
+# Komputasi atau Rekayasa
+def KomputasiRekayasa (nim) :
+    if nim // 100000 == 196 :
+        return "Komputasi"
+    else : # == 165
+        return "Rekayasa"
+
 # Menghitung nilai 1 semester
-def SatuSemester (semester) :
-    print("Nanti")
+def SatuSemester (fakultas, semester) :
+    semester += 1
+    if fakultas == "Komputasi" :
+        if semester == 1 :
+            mataKuliahSemester = [["Matematika IA", "Fisika Dasar IA", "Olah Raga", "Pengenalan Komputasi", "Tata Tulis Karya Ilmiah", "Bahasa Inggris"],
+                ["MA1101", "FI1101", "KU1001", "KU1102", "KU1011", "KU1024"],
+                [4, 4, 2, 3, 2, 2]]
+        else : # semester == 2
+            mataKuliahSemester = [["Matematika IIA", "Fisika Dasar IIA", "Kimia Dasar B", "Pengantar Rekayasa dan Desain", "Komputasi dan Masyarakat", "Dasar Pemrograman"],
+                ["MA1201", "FI1201", "KI1002", "KU1202", "II1101", "IF1210"],
+                [4, 4, 4, 3, 2, 2]]
+    else : # fakultas == "Rekayasa"
+        if semester == 1 :
+            mataKuliahSemester = [["Matematika IA", "Fisika Dasar IA", "Olah Raga", "Pengenalan Komputasi", "Tata Tulis Karya Ilmiah", "Bahasa Inggris"],
+                ["MA1101", "FI1101", "KU1001", "KU1102", "KU1011", "KU1024"],
+                [4, 4, 2, 3, 2, 2]]
+        else : # semester == 2
+            mataKuliahSemester = [["Matematika IIA", "Fisika Dasar IIA", "Kimia Dasar B", "Pengantar Rekayasa dan Desain", "Pengantar Analisis Rangkaian", "Dasar Pemrograman"],
+                ["MA1201", "FI1201", "KI1002", "KU1202", "EL1200", "IF1210"],
+                [4, 4, 4, 3, 2, 2]]
+            
+    SatuMataKuliah (semester, mataKuliahSemester)
     
 # Menghitung nilai 1 mata kuliah
-def SatuMataKuliah (semester, mataKuliah) :    
-    print("Nanti")
+def SatuMataKuliah (semester, mataKuliah) :
+    print(f"----------\tPENILAIAN SEMESTER {semester}\t----------")  
+    print("")  
+    for i in range (6) :
+        print(mataKuliah[0][i], "-", mataKuliah[1][i], "-", mataKuliah[2][i])
     
 # Nilai 1 komponen penilaian
 def SatuKomponenPenilaian (arrayKomponenNilai, persentasePenilaian) : 
@@ -71,22 +100,27 @@ def CetakHasil (nama, nim, fakultas, programStudi, nilaiSatuSemester) :
     print("Nama\t\t\t:\t", nama)
     print("NIM\t\t\t:\t", nim)
     print("Fakultas\t\t:\t", fakultas)
-    print("Program Studi\t\t:\t", programStudi)
 
 
-# MAIN CODE
+# ALGORITMA
+# Judul
+print("")
+print("----------\tSISTEM PENILAIAN MAHASISWA\t----------")
+print("----------\t\tTPB STEI 2022\t\t----------")
+print("")
+
 # Identitas
-nama = input("Masukkan nama lengkap: ")
-nim = int(input("Masukkan NIM: "))
-fakultas = input("Masukkan fakultas: ")
-programStudi = input("Masukkan program studi: ")
+nama = input("Masukkan nama lengkap\t: ")
+nim = int(input("Masukkan NIM\t\t: "))
+fakultas = KomputasiRekayasa (nim)
+print(f"Fakultas\t\t: {fakultas}")
 print("")
 
 # Penilaian
 # Looping tiap semester
 for i in range (2):
-    nilaiSatuSemester = SatuSemester (i)
-    CetakHasil (nama, nim, fakultas, programStudi, nilaiSatuSemester)
+    nilaiSatuSemester = SatuSemester (fakultas, i)
+    CetakHasil (nama, nim, fakultas, nilaiSatuSemester)
     
         
 

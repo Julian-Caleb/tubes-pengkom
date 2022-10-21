@@ -13,3 +13,7 @@
 #     for i in range (7) :
 #         if nilaiAkhir >= angkaIndex[i] :
 #             print(hurufIndex[i])
+
+# semesterSatu = [["Matematika IA", "Fisika Dasar IA", "Olah Raga", "Pengenalan Komputasi", "Tata Tulis Karya Ilmiah", "Bahasa Inggris"],
+#                 ["MA1101", "FI1101", "KU1001", "KU1102", "KU1011", "KU1024"],
+#                 [4, 4, 2, 3, 2, 2]]
