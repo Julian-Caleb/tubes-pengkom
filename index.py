@@ -34,30 +34,65 @@ def SatuSemester (fakultas, semester) :
                 ["MA1201", "FI1201", "KI1002", "KU1202", "EL1200", "IF1210"],
                 [4, 4, 4, 3, 2, 2]]
             
-    SatuMataKuliah (semester, mataKuliahSemester)
-    
-# Menghitung nilai 1 mata kuliah
-def SatuMataKuliah (semester, mataKuliah) :
     print(f"----------\tPENILAIAN SEMESTER {semester}\t----------")  
     print("")  
-    for i in range (6) :
-        print(mataKuliah[0][i], "-", mataKuliah[1][i], "-", mataKuliah[2][i])
     
-# Nilai 1 komponen penilaian
-def SatuKomponenPenilaian (arrayKomponenNilai, persentasePenilaian) : 
-    print("Nanti")
+    nilaiSatuSemester = [[0 for i in range (6)], ["T" for i in range (6)]]
+    for i in range (6) :
+        nilaiSatuSemester[0][i] = MataKuliah (mataKuliahSemester,i)
+        nilaiSatuSemester[1][i] = MencariIndex (nilaiSatuSemester[0][i])
+        print("")
+        print(f"Nilai akhir {mataKuliahSemester[0][i]} pada semester {semester} adalah {nilaiSatuSemester[0][i]}.")
+        print(f"Index akhir {mataKuliahSemester[0][i]} pada semester {semester} adalah {nilaiSatuSemester[1][i]}.")
+        print("")
+    IP = MenghitungIP ()
+    IndexIP = MencariIndexIP ()
+    return IP, indexIP
+    
+    
+# Menghitung nilai tiap mata kuliah
+def MataKuliah (mataKuliahSemester,i) :
+    nilaiMataKuliah = 0
+    print(f"{i+1}. Penilaian Mata Kuliah {mataKuliahSemester[0][i]} - {mataKuliahSemester[1][i]}")
+    print("")
+    nilaiMataKuliah = KomponenPenilaian()
+    
+    return nilaiMataKuliah         
+    
+# Menghitung nilai tiap komponen penilaian
+def KomponenPenilaian () : 
+    nilaiMataKuliah = 0 
+    komponenPenilaian = [["UAS", "UTS", "Kuis / KBF", "PR, Tugas, dan lain-lain"], 
+                         [37.5, 37.5, 15, 10]]
+    for i in range(4) :
+        print(f"- Penilaian {komponenPenilaian[0][i]} - ")
+        nilaiSatuKomponen = 0
+        apakahAda = int(input(f"Berapa banyak penilaian {komponenPenilaian[0][i]}: "))
+        if apakahAda == 0 :
+            print(f"Tidak ada penilaian {komponenPenilaian[0][1]}")
+        else :
+            for j in range (apakahAda) :
+                nilaiSementara = float(input(f"Masukkan nilai ke-{j+1}: "))
+                nilaiSatuKomponen += nilaiSementara
+            nilaiSatuKomponen = nilaiSatuKomponen / apakahAda
+            
+        nilaiMataKuliah += (nilaiSatuKomponen * komponenPenilaian[1][i]) / 100
+        print("")
+    
+    
+    return nilaiMataKuliah
     
 # Mencari index satu mata kuliah
-def MencariIndexNilaiAkhir (nilaiAkhir) :
+def MencariIndex (nilaiSatuMataKuliah) :
     # inputIndex()
     hurufIndex = ["A", "AB", "B", "BC", "C", "D", "E"]
     angkaIndex = [75, 68, 60, 53, 45, 38, 0]
-    bermasalah = input("Apakah bermasalah (Y/N):")
+    bermasalah = input("Apakah bermasalah di mata kuliah ini? (Y/N): ")
     if bermasalah == "Y" :
         return "T"
     else :
         for i in range (7) :
-            if nilaiAkhir >= angkaIndex[i] :
+            if nilaiSatuMataKuliah >= angkaIndex[i] :
                 return hurufIndex[i]
     
 # Menghitung IP
