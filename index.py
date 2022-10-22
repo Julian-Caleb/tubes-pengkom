@@ -9,8 +9,10 @@
 def KomputasiRekayasa (nim) :
     if nim // 100000 == 196 :
         return "Komputasi"
-    else : # == 165
+    elif nim // 100000 == 165 :
         return "Rekayasa"
+    else :
+        return "Bukan NIM STEI"
 
 # Menghitung nilai 1 semester
 def SatuSemester (fakultas, semester) :
@@ -45,10 +47,11 @@ def SatuSemester (fakultas, semester) :
         print(f"Nilai akhir {mataKuliahSemester[0][i]} pada semester {semester} adalah {nilaiSatuSemester[0][i]}.")
         print(f"Index akhir {mataKuliahSemester[0][i]} pada semester {semester} adalah {nilaiSatuSemester[1][i]}.")
         print("")
-    IP = MenghitungIP ()
-    IndexIP = MencariIndexIP ()
-    return IP, indexIP
-    
+        print("--------------------------------------------------")
+        print("")
+    nilaiIP = MenghitungIP (mataKuliahSemester[0], mataKuliahSemester[2], nilaiSatuSemester[1])
+    indexIP = MencariIndexIP (nilaiIP)
+    return nilaiIP, indexIP
     
 # Menghitung nilai tiap mata kuliah
 def MataKuliah (mataKuliahSemester,i) :
@@ -69,7 +72,7 @@ def KomponenPenilaian () :
         nilaiSatuKomponen = 0
         apakahAda = int(input(f"Berapa banyak penilaian {komponenPenilaian[0][i]}: "))
         if apakahAda == 0 :
-            print(f"Tidak ada penilaian {komponenPenilaian[0][1]}")
+            print(f"Tidak ada penilaian {komponenPenilaian[0][i]}") # Kalau tidak ada, bagaimana persentasenya?
         else :
             for j in range (apakahAda) :
                 nilaiSementara = float(input(f"Masukkan nilai ke-{j+1}: "))
@@ -96,7 +99,7 @@ def MencariIndex (nilaiSatuMataKuliah) :
                 return hurufIndex[i]
     
 # Menghitung IP
-def MenghitungIP (banyakSKS, nilaiIndex) :
+def MenghitungIP (mataKuliah, banyakSKS, nilaiIndex) :
     totalSKS = 0
     totalNilai = 0
     angkaIndexMatkul = [0 for i in range (7)]
@@ -105,7 +108,10 @@ def MenghitungIP (banyakSKS, nilaiIndex) :
     for i in range (len(banyakSKS)) :
         j = 0
         while True :
-            if nilaiIndex[i] == hurufIndex[j] :
+            if nilaiIndex[i] == "T" :
+                print(f"Nilai mata kuliah {mataKuliah[i]} bermasalah, silahkan konsultasikan ke dosen")
+                exit()
+            elif nilaiIndex[i] == hurufIndex[j] :
                 angkaIndexMatkul[i] = angkaIndex[i]
                 break
             else :
@@ -124,7 +130,7 @@ def MencariIndexIP (nilaiAkhir) :
             return hurufIndex[i]
 
 # Mencetak hasil
-def CetakHasil (nama, nim, fakultas, programStudi, nilaiSatuSemester) :
+def CetakHasil (nama, nim, fakultas, nilaiSatuSemester, semester) :
     # PROSEDUR MENCETAK HASIL BELAJAR 1 SEMESTER MAHASISWA
     # Prosedur dibuat untuk mencetak identitas dan hasil belajar mahasiswa dalam jangka waktu 1 semester
     
@@ -135,7 +141,9 @@ def CetakHasil (nama, nim, fakultas, programStudi, nilaiSatuSemester) :
     print("Nama\t\t\t:\t", nama)
     print("NIM\t\t\t:\t", nim)
     print("Fakultas\t\t:\t", fakultas)
-
+    print(f"Nilai akhir Semester {semester+1} \t:\t", nilaiSatuSemester[0])
+    print(f"Index akhir Semester {semester+1} \t:\t", nilaiSatuSemester[1])
+    print("")
 
 # ALGORITMA
 # Judul
@@ -155,7 +163,7 @@ print("")
 # Looping tiap semester
 for i in range (2):
     nilaiSatuSemester = SatuSemester (fakultas, i)
-    CetakHasil (nama, nim, fakultas, nilaiSatuSemester)
+    CetakHasil (nama, nim, fakultas, nilaiSatuSemester, i)
     
         
 
