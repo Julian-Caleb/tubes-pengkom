@@ -65,7 +65,7 @@ def MataKuliah (mataKuliahSemester,i) :
 # Menghitung nilai tiap komponen penilaian
 def KomponenPenilaian () : 
     nilaiMataKuliah = 0 
-    komponenPenilaian = [["UAS", "UTS", "Kuis / KBF", "PR, Tugas, dan lain-lain"], 
+    komponenPenilaian = [["UAS", "UTS", "Kuis, KBF, dan Penilaian", "PR, Tugas, dan lain-lain"], 
                          [37.5, 37.5, 15, 10]]
     for i in range(4) :
         print(f"- Penilaian {komponenPenilaian[0][i]} - ")
