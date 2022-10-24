@@ -64,25 +64,30 @@ def MataKuliah (mataKuliahSemester,i) :
     
 # Menghitung nilai tiap komponen penilaian
 def KomponenPenilaian () : 
-    nilaiMataKuliah = 0 
-    komponenPenilaian = [["UAS", "UTS", "Kuis, KBF, dan Penilaian", "PR, Tugas, dan lain-lain"], 
+    nilaiMataKuliah = 0
+    i = 0
+    komponenPenilaian = [["UAS", "UTS", "Kuis atau KBF", "PR, Tugas, dan lain-lain"], 
                          [37.5, 37.5, 15, 10]]
-    for i in range(4) :
+    for i in range (4) :
         print(f"- Penilaian {komponenPenilaian[0][i]} - ")
         nilaiSatuKomponen = 0
         apakahAda = int(input(f"Berapa banyak penilaian {komponenPenilaian[0][i]}: "))
         if apakahAda == 0 :
+            # UAS dan UTS pasti ada, sedangkan kuis / kbf belum tentu ada
             print(f"Tidak ada penilaian {komponenPenilaian[0][i]}") # Kalau tidak ada, bagaimana persentasenya?
+            komponenPenilaian = [["UAS", "UTS", "Kuis atau KBF", "PR, Tugas, dan lain-lain"], 
+                         [40, 40, 0, 20]]
+            
         else :
             for j in range (apakahAda) :
                 nilaiSementara = float(input(f"Masukkan nilai ke-{j+1}: "))
                 nilaiSatuKomponen += nilaiSementara
             nilaiSatuKomponen = nilaiSatuKomponen / apakahAda
             
-        nilaiMataKuliah += (nilaiSatuKomponen * komponenPenilaian[1][i]) / 100
+        nilaiMataKuliah += (nilaiSatuKomponen * komponenPenilaian[1][i]) / 100                
         print("")
     
-    
+    print(komponenPenilaian)
     return nilaiMataKuliah
     
 # Mencari index satu mata kuliah
