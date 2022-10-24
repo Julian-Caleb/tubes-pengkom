@@ -83,11 +83,11 @@ def KomponenPenilaian () :
                 nilaiSementara = float(input(f"Masukkan nilai ke-{j+1}: "))
                 nilaiSatuKomponen += nilaiSementara
             nilaiSatuKomponen = nilaiSatuKomponen / apakahAda
-            
-        nilaiMataKuliah += (nilaiSatuKomponen * komponenPenilaian[1][i]) / 100                
+            nilaiMataKuliah += (nilaiSatuKomponen * komponenPenilaian[1][i]) / 100                
+        
         print("")
+        
     
-    print(komponenPenilaian)
     return nilaiMataKuliah
     
 # Mencari index satu mata kuliah
@@ -111,16 +111,17 @@ def MenghitungIP (mataKuliah, banyakSKS, nilaiIndex) :
     hurufIndex = ["A", "AB", "B", "BC", "C", "D", "E"]
     angkaIndex = [4, 3.5, 3, 2.5, 2, 1, 0]
     for i in range (len(banyakSKS)) :
-        j = 0
-        while True :
-            if nilaiIndex[i] == "T" :
+        if nilaiIndex[i] == "T" :
                 print(f"Nilai mata kuliah {mataKuliah[i]} bermasalah, silahkan konsultasikan ke dosen")
                 exit()
-            elif nilaiIndex[i] == hurufIndex[j] :
-                angkaIndexMatkul[i] = angkaIndex[i]
-                break
-            else :
-                j += 1
+        else :
+            j = 0
+            while True :
+                if nilaiIndex[i] == hurufIndex[j] :
+                    angkaIndexMatkul[i] = angkaIndex[i]
+                    break
+                else :
+                    j += 1
         totalNilai += banyakSKS[i] * angkaIndexMatkul[i]
         totalSKS += banyakSKS[i]
     nilaiIP = totalNilai/totalSKS
