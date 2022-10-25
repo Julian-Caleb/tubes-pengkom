@@ -96,7 +96,8 @@ def MencariIndex (nilaiSatuMataKuliah) :
     hurufIndex = ["A", "AB", "B", "BC", "C", "D", "E"]
     angkaIndex = [75, 68, 60, 53, 45, 38, 0]
     bermasalah = input("Apakah bermasalah di mata kuliah ini? (Y/N): ")
-    if bermasalah == "Y" :
+    presensi = int(input("Berapakah presensinya (dalam persen)? "))
+    if bermasalah == "Y" or presensi < 80 :
         return "T"
     else :
         for i in range (7) :
