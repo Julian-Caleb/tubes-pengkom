@@ -2,11 +2,20 @@
 # Program dibuat untuk menghitung nilai mahasiswa dalam 2 semester TPB
 
 # KAMUS GLOBAL
-# 
+# nama, fakultas : str
+# nim, i : int
+# nilaiSatuSemester: arr [ arr [0..1] of float, arr [0..1] of str ]
 
 # FUNCTION AND PROCEDURES    
 # Komputasi atau Rekayasa
 def KomputasiRekayasa (nim) :
+    # FUNCTION KomputasiRekayasa
+    # Function dibuat untuk menentukan apakah mahasiswa masuk dalam fakultas STEI-K atau STEI-R berdasarkan NIM
+
+    # KAMUS LOKAL
+    # nim : int    
+    
+    # ALGORITMA
     if nim // 100000 == 196 :
         return "Komputasi"
     elif nim // 100000 == 165 :
@@ -16,6 +25,18 @@ def KomputasiRekayasa (nim) :
 
 # Menghitung nilai 1 semester
 def SatuSemester (fakultas, semester) :
+    # FUNCTION SatuSemester
+    # Function dibuat untuk mencari nilai dan index mahasiswa dalam satu semester
+    
+    # KAMUS LOKAL
+    # semester, i : int
+    # fakultas : str
+    # mataKuliahSemester : arr [ arr [0..6] of str, arr [0..6] of str, arr [0..6] of int ]
+    # nilaiSatuSemester : arr [ arr [0..6] of int, arr [0..6] of str ]
+    # nilaiIP : float
+    # indexIP : str
+    
+    # ALGORITMA
     semester += 1
     if fakultas == "Komputasi" :
         if semester == 1 :
@@ -55,6 +76,15 @@ def SatuSemester (fakultas, semester) :
     
 # Menghitung nilai tiap mata kuliah
 def MataKuliah (mataKuliahSemester,i) :
+    # FUNCTION MataKuliah
+    # Function dibuat untuk menghitung total nilai satu mata kuliah berdasarkan komponen penilaian yang ada
+
+    # KAMUS LOKAL
+    # nilaiMataKuliah : float
+    # mataKuliahSemester : arr [ arr [0..6] of str, arr [0..6] of str, arr [0..6] of int ]
+    # i : int
+    
+    # ALGORITMA
     nilaiMataKuliah = 0
     print(f"{i+1}. Penilaian Mata Kuliah {mataKuliahSemester[0][i]} - {mataKuliahSemester[1][i]}")
     print("")
@@ -64,6 +94,16 @@ def MataKuliah (mataKuliahSemester,i) :
     
 # Menghitung nilai tiap komponen penilaian
 def KomponenPenilaian () : 
+    # FUNCTION KomponenPenilaian
+    # Function dibuat untuk menghitung nilai setiap komponen penilaian
+    
+    # KAMUS LOKAL
+    # i, j : int
+    # komponenPenilaian : arr [ arr [0..4] of str, arr [0..4] of float ]
+    # nilaiSatuKomponen, nilaiMataKuliah, nilaiSementara : float
+    # apakahAda : int
+    
+    # ALGORITMA
     nilaiMataKuliah = 0
     i = 0
     komponenPenilaian = [["UAS", "UTS", "Kuis atau KBF", "PR, Tugas, dan lain-lain"], 
@@ -92,7 +132,17 @@ def KomponenPenilaian () :
     
 # Mencari index satu mata kuliah
 def MencariIndex (nilaiSatuMataKuliah) :
-    # inputIndex()
+    # FUNCTION MencariIndex
+    # Function dibuat untuk mencari index nilai mata kuliah berdasarkan nilai satu mata kuliah
+    
+    # KAMUS LOKAL
+    # bermasalah : str
+    # presensi : int
+    # nilaiSatuMataKuliah : float
+    # hurufIndex : arr [0..7] of str
+    # angkaIndex : arr [0..7] of int
+    
+    # ALGORITMA
     hurufIndex = ["A", "AB", "B", "BC", "C", "D", "E"]
     angkaIndex = [75, 68, 60, 53, 45, 38, 0]
     bermasalah = input("Apakah bermasalah di mata kuliah ini? (Y/N): ")
@@ -106,6 +156,20 @@ def MencariIndex (nilaiSatuMataKuliah) :
     
 # Menghitung IP
 def MenghitungIP (mataKuliah, banyakSKS, nilaiIndex) :
+    # FUNCTION MenghitungIP
+    # Function dibuat untuk mencari nilai IP semester berdasarkan index setiap mata kuliah dan banyak sks
+    
+    # KAMUS LOKAL
+    # totalSKS : int
+    # totalNilai : float
+    # angkaIndexMatkul : arr [0..7] of float
+    # hurufIndex : arr [0..7] of str
+    # angkaIndex : arr [0..7] of float
+    # mataKuliah : arr [0..6] of str
+    # banyakSKS : arr [0..6] of int
+    # i : int
+    
+    # ALGORITMA
     totalSKS = 0
     totalNilai = 0
     angkaIndexMatkul = [0 for i in range (7)]
@@ -130,6 +194,16 @@ def MenghitungIP (mataKuliah, banyakSKS, nilaiIndex) :
 
 # Mencari index IP
 def MencariIndexIP (nilaiAkhir) :
+    # FUNCTION MencariIndexIP
+    # Function dibuat untuk mencari IP semester berdasarkan nilai akhir semester mahasiswa
+    
+    # KAMUS LOKAL
+    # i : int
+    # nilaiAkhir : float
+    # hurufIndex : arr [0..7] of str
+    # angkaIndex : arr [0..7] of float
+    
+    # ALGORITMA
     hurufIndex = ["A", "AB", "B", "BC", "C", "D", "E"]
     angkaIndex = [4, 3.5, 3, 2.5, 2, 1, 0]
     for i in range (7) :
@@ -137,19 +211,23 @@ def MencariIndexIP (nilaiAkhir) :
             return hurufIndex[i]
 
 # Mencetak hasil
-def CetakHasil (nama, nim, fakultas, nilaiSatuSemester, semester) :
-    # PROSEDUR MENCETAK HASIL BELAJAR 1 SEMESTER MAHASISWA
+def CetakHasil (nama, nim, fakultas, nilaiSemester, indexSemester, semester) :
+    # PROSEDUR CetakHasil
     # Prosedur dibuat untuk mencetak identitas dan hasil belajar mahasiswa dalam jangka waktu 1 semester
     
-    # KAMUS
+    # KAMUS LOKAL
+    # nama, fakultas : str
+    # nim, semester : int
+    # nilaiSemester : float
+    # indexSemester : str
     
     # ALGORITMA
     print("----------HASIL PENILAIAN MAHASISWA----------")
     print("Nama\t\t\t:\t", nama)
     print("NIM\t\t\t:\t", nim)
     print("Fakultas\t\t:\t", fakultas)
-    print(f"Nilai akhir Semester {semester+1} \t:\t", nilaiSatuSemester[0])
-    print(f"Index akhir Semester {semester+1} \t:\t", nilaiSatuSemester[1])
+    print(f"Nilai akhir Semester {semester+1} \t:\t", nilaiSemester)
+    print(f"Index akhir Semester {semester+1} \t:\t", indexSemester)
     print("")
 
 # ALGORITMA
@@ -170,7 +248,7 @@ print("")
 # Looping tiap semester
 for i in range (2):
     nilaiSatuSemester = SatuSemester (fakultas, i)
-    CetakHasil (nama, nim, fakultas, nilaiSatuSemester, i)
+    CetakHasil (nama, nim, fakultas, round(nilaiSatuSemester[0],1), nilaiSatuSemester[1], i)
     
         
 
