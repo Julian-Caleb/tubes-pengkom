@@ -77,7 +77,7 @@ def SatuSemester (fakultas, semester) :
 # Menghitung nilai tiap mata kuliah
 def MataKuliah (mataKuliahSemester,i) :
     # FUNCTION MataKuliah
-    # Function dibuat untuk menghitung total nilai satu mata kuliah berdasarkan komponen penilaian yang ada
+    # Function dibuat untuk menunjukkan mata kuliah yang dihitung nilainya
 
     # KAMUS LOKAL
     # nilaiMataKuliah : float
